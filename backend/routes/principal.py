@@ -2,7 +2,7 @@ from flask import Blueprint, request
 import os 
 principal_bp = Blueprint('principal', __name__)
 
-@principal_bp.route('/hola',methods=['GET'])
+@principal_bp.route('/',methods=['GET'])
 def index():
     return "desde un blueprint"
 
