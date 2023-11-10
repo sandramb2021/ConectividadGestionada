@@ -14,7 +14,7 @@ const MiComponente = () => {
 	// when readAsText will invoke, onload() method on the read object will execute.
     read.onload = function (e) {
       // perform some operations with read data
-      alert(files[0].name);
+      //alert(files[0].name);
     };
 	// Invoking the readAsText() method by passing the uploaded file as a parameter
     read.readAsText(files[0]);
