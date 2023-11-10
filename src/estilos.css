@@ -1,0 +1,41 @@
+body{
+    background: cadetblue;
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#leerArchivos{
+    margin-top: 2em;
+    margin-left: 2em;
+}
+input{
+    border: 1px;
+    border-color: darkcyan;
+    background-color: darkgrey;
+    text-align: left;
+    height: 30px;
+    width: 500px;
+    margin-left: 2em;
+    
+}
+
+#form-line{
+    display: flex;
+    flex-direction: row;
+    margin: 50px 50px;
+}
+
+button{
+    background: darkblue;
+    padding: 2px 2px 2px 2xp;
+    color: white;
+    width: 230px;
+    height: 35px;
+    border-radius: 8px;
+    margin-left: 1em;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
