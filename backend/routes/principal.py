@@ -32,6 +32,4 @@ def upload_file_prefa():
 
     return 'Archivo cargado con éxito'
 
-@principal_bp.route('/prefa', methods=['GET'])
-def dowload_file():
-    print("hola")
+
