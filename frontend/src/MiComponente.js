@@ -1,13 +1,14 @@
 //  import required libraries
 import React, {useState} from "react";
 import ReactFileReader from 'react-file-reader';
+import axios from 'axios';
 import './estilos.css';
 
 const MiComponente = () => {
   
   const [nokiaFileSelected, setNokiaFileSelected] = useState('');
   const [posfaFileSelected, setPosfaFileSelected] = useState('');
-
+  
   const uploadFile = (files) => {
     // Creating the object of FileReader Class
     var read = new FileReader();
@@ -21,6 +22,24 @@ const MiComponente = () => {
     (files[0].name.endsWith('.csv')) ? setNokiaFileSelected(files[0].name) : setPosfaFileSelected(files[0].name)
     console.log(files[0].name);
   };
+
+  const btnProcesar = async() => {
+    const formu = new FormData();
+
+    formu.append("files", nokiaFileSelected);
+    formu.append("files", posfaFileSelected);
+    
+    console.log(formu);
+
+    await axios.post("http://ec2-34-224-8-97.compute-1.amazonaws.com:5000/", formu)
+    .then(response=>{
+      console.log(response.data);
+    }).catch(error=>{
+      console.log(error);
+    });
+
+  };
+
   return (
     <>
       <div>
@@ -49,7 +68,11 @@ const MiComponente = () => {
             <ReactFileReader handleFiles = {uploadFile} fileTypes={".xlsx"}>
               <button className="btn"> Leer archivo POSFA </button>
             </ReactFileReader>
-          </div>        
+          </div>
+          <div id="form-line">
+            <button className="btn" onClick={()=>btnProcesar()}> Procesar archivos </button>
+            <input type="file" name="files" onChange={ (e) => setPosfaFileSelected(e.target.files) }></input>
+          </div>     
       </div>
     </>
   );
