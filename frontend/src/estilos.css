@@ -25,7 +25,7 @@ input{
     margin: 50px 50px;
 }
 
-button{
+button, .btn{
     background: darkblue;
     padding: 2px 2px 2px 2xp;
     color: white;
