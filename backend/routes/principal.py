@@ -18,7 +18,7 @@ def upload_file_postfa():
         file = request.files['file']
         if file.filename == '':
             return 'Nombre de archivo no válido'
-        upload_folder = os.path.join(os.getcwd(), 'backend/storage')
+        upload_folder = os.path.join(os.getcwd()+'/ConectividadGestionada/backend/storage')
         try:
             file.save(os.path.join(upload_folder, "PREFA"+file.filename))
         except Exception as err:
@@ -37,7 +37,8 @@ def upload_file_prefa():
         file = request.files['file']
         if file.filename == '':
             return 'Nombre de archivo no válido'
-        upload_folder = os.path.join(os.getcwd(), 'backend/storage')
+        upload_folder = os.path.join(os.getcwd()+'/ConectividadGestionada/backend/storage')
+        print(upload_folder)
         try:
             file.save(os.path.join(upload_folder, "POSTFA"+file.filename))
         except Exception as err:
