@@ -3,11 +3,14 @@ import os
 
 directorio_final = os.getcwd()+"/ConectividadGestionada/backend/storage"
 
+local = "/backend/storage"
+ec2 = "/storage"
 
 def read_storage_prefa():
     try:
-        hola = os.getcwd()+"/backend/storage"
+        hola = os.getcwd()+ec2
         directory = os.listdir(hola)
+        print(directory)
         for file in directory:
             if file.startswith("PREFA"):
                 return hola+"/"+file
@@ -17,7 +20,7 @@ def read_storage_prefa():
 
 def read_storage_postfa():
     try:
-        hola = os.getcwd()+"/backend/storage"
+        hola = os.getcwd()+ec2
         directory = os.listdir(hola)
         for file in directory:
             if file.startswith("POSTFA"):
