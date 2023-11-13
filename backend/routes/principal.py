@@ -1,5 +1,7 @@
 from flask import Blueprint, request
 import os 
+import boto3
+import json
 
 from controlers.funtion import read_storage_prefa, read_storage_postfa, load_file_csv, load_file_excel
 from controlers.csv import obtenerListaLiquidacion, exportarTablaNokia, periodoNokia
@@ -8,9 +10,21 @@ from controlers.process import procesar_archivos
 
 principal_bp = Blueprint('principal', __name__)
 
+config_path = "config.json"
+
 @principal_bp.route('/',methods=['GET'])
-def index():
-    return "desde un blueprint"
+def listar_buckets():
+    with open(config_path) as f:
+        config = json.load(f)
+        
+    s3 = boto3.client('s3', aws_access_key_id=config["aws_access_key_id"],aws_secret_access_key=config["aws_secret_access_key"])
+    try:
+        response = s3.list_buckets()
+        for bucket in response['Buckets']:
+            return(f"- {bucket['Name']}")
+    except Exception as e:
+        print(f'Ocurrió un error al listar los buckets: {e}')
+        return e
 
 local = "/backend/storage"
 ec2 = "/storage"
