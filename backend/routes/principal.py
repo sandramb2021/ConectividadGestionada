@@ -69,13 +69,12 @@ def process_file():
             tabla_postfa_final = exportarTablaNokia(postfa_file,liquidacion)
             periodo_nokia = periodoNokia(postfa_file)
 
-            print(postfa_file)
-            # prefa_file = load_file_excel(path_prefa)
-            # tabla_xlxs_final = exportarTablaPrefa(prefa_file)
-            # periodo_prefa = periodoPrefa(prefa_file)
-            # process = procesar_archivos(tabla_postfa_final,tabla_xlxs_final,periodo_nokia,periodo_prefa)
+            prefa_file = load_file_excel(path_prefa)
+            tabla_xlxs_final = exportarTablaPrefa(prefa_file)
+            periodo_prefa = periodoPrefa(prefa_file)
+            process = procesar_archivos(tabla_postfa_final,tabla_xlxs_final,periodo_nokia,periodo_prefa)
             # print(process)
-            return "hola"
+            return "Se proceso correctamente el archivo"
         except Exception as err:
             return "Error en la lectura"+err
     except Exception as err:
