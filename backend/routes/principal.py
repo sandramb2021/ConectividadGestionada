@@ -72,6 +72,7 @@ def process_file():
             prefa_file = load_file_excel(path_prefa)
             tabla_xlxs_final = exportarTablaPrefa(prefa_file)
             periodo_prefa = periodoPrefa(prefa_file)
+            print(prefa_file)
             process = procesar_archivos(tabla_postfa_final,tabla_xlxs_final,periodo_nokia,periodo_prefa)
             # print(process)
             return "Se proceso correctamente el archivo"
