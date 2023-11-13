@@ -16,8 +16,8 @@ config_path = "config.json"
 def listar_buckets():
     with open(config_path) as f:
         config = json.load(f)
-        
-    s3 = boto3.client('s3', aws_access_key_id=config["aws_access_key_id"],aws_secret_access_key=config["aws_secret_access_key"])
+
+    s3 = boto3.client('s3', aws_access_key_id=config["aws_access_key_id"],aws_secret_access_key=config["aws_secret_access_key"],region_name=config["region"])
     try:
         response = s3.list_buckets()
         for bucket in response['Buckets']:
