@@ -3,6 +3,7 @@ import os
 import boto3
 import json
 
+from s3.list_buckets import list_buckets
 from controlers.funtion import read_storage_prefa, read_storage_postfa, load_file_csv, load_file_excel
 from controlers.csv import obtenerListaLiquidacion, exportarTablaNokia, periodoNokia
 from controlers.xlsx import exportarTablaPrefa, periodoPrefa
@@ -10,22 +11,13 @@ from controlers.process import procesar_archivos
 
 principal_bp = Blueprint('principal', __name__)
 
+## RUTA DONDE ESTAN LAS CONFIGURACIONES DE MIS CREDENCIALES
 config_path = "config.json"
 
+## RURA QUE DEVUELVE LOS BUCKETS
 @principal_bp.route('/',methods=['GET'])
 def listar_buckets():
-    with open(config_path) as f:
-        config = json.load(f)
-    s3 = boto3.client('s3', aws_access_key_id=config["aws_access_key_id"],aws_secret_access_key=config["aws_secret_access_key"],region_name=config["region"])
-    try:
-        response = s3.list_buckets()
-        for bucket in response['Buckets']:
-            print(f"- {bucket['Name']}")
-        
-        return "ok"
-    except Exception as e:
-        print(f'Ocurrió un error al listar los buckets: {e}')
-        return e
+    list_buckets(config_path)
 
 local = "/backend/storage"
 ec2 = "/storage"
