@@ -21,7 +21,9 @@ def listar_buckets():
     try:
         response = s3.list_buckets()
         for bucket in response['Buckets']:
-            return(f"- {bucket['Name']}")
+            print(f"- {bucket['Name']}")
+        
+        return "ok"
     except Exception as e:
         print(f'Ocurrió un error al listar los buckets: {e}')
         return e
