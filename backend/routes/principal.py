@@ -69,9 +69,10 @@ def process_file():
             tabla_postfa_final = exportarTablaNokia(postfa_file,liquidacion)
             periodo_nokia = periodoNokia(postfa_file)
 
-            prefa_file = load_file_excel(path_prefa)
-            tabla_xlxs_final = exportarTablaPrefa(prefa_file)
-            periodo_prefa = periodoPrefa(prefa_file)
+            print(postfa_file)
+            # prefa_file = load_file_excel(path_prefa)
+            # tabla_xlxs_final = exportarTablaPrefa(prefa_file)
+            # periodo_prefa = periodoPrefa(prefa_file)
             # process = procesar_archivos(tabla_postfa_final,tabla_xlxs_final,periodo_nokia,periodo_prefa)
             # print(process)
             return "hola"
