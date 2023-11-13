@@ -17,7 +17,8 @@ config_path = "config.json"
 ## RURA QUE DEVUELVE LOS BUCKETS
 @principal_bp.route('/',methods=['GET'])
 def listar_buckets():
-    list_buckets(config_path)
+    lista = list_buckets(config_path)
+    return lista
 
 local = "/backend/storage"
 ec2 = "/storage"
