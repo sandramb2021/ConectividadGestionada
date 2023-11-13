@@ -64,18 +64,15 @@ def process_file():
         path_prefa = read_storage_prefa()
 
         try:
-            # postfa_file = load_file_csv(path_postfa)
-            # liquidacion = obtenerListaLiquidacion(postfa_file)
-            # tabla_postfa_final = exportarTablaNokia(postfa_file,liquidacion)
-            # periodo_nokia = periodoNokia(postfa_file)
+            postfa_file = load_file_csv(path_postfa)
+            liquidacion = obtenerListaLiquidacion(postfa_file)
+            tabla_postfa_final = exportarTablaNokia(postfa_file,liquidacion)
+            periodo_nokia = periodoNokia(postfa_file)
 
-            # prefa_file = load_file_excel(path_prefa)
-            # tabla_xlxs_final = exportarTablaPrefa(prefa_file)
-            # periodo_prefa = periodoPrefa(prefa_file)
-
-            print(path_postfa)
-            print(path_prefa)
-            #process = procesar_archivos(tabla_postfa_final,tabla_xlxs_final,periodo_nokia,periodo_prefa)
+            prefa_file = load_file_excel(path_prefa)
+            tabla_xlxs_final = exportarTablaPrefa(prefa_file)
+            periodo_prefa = periodoPrefa(prefa_file)
+            process = procesar_archivos(tabla_postfa_final,tabla_xlxs_final,periodo_nokia,periodo_prefa)
             # print(process)
             return "hola"
         except Exception as err:

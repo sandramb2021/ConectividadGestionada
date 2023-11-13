@@ -51,7 +51,7 @@ def procesar_archivos(prefa, postfa, periodoNokia, periodoPostfa):
 
         tablaFinal = mergeIndex.assign(RESULTADO=listDesvio)
         print(tablaFinal)
-        direc = os.getcwd()+"/backend/storage/"
+        direc = os.getcwd()+"/storage/"
         tablaFinal.to_excel(direc+f"TablaFinal${periodoNokia}.xlsx", index=False)
         return "hola"
     except Exception as err:

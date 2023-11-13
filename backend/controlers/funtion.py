@@ -10,7 +10,6 @@ def read_storage_prefa():
     try:
         hola = os.getcwd()+ec2
         directory = os.listdir(hola)
-        print(directory)
         for file in directory:
             if file.startswith("PREFA"):
                 return hola+"/"+file
