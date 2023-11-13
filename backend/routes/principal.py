@@ -12,6 +12,9 @@ principal_bp = Blueprint('principal', __name__)
 def index():
     return "desde un blueprint"
 
+local = "/backend/storage"
+ec2 = "/storage"
+
 
 @principal_bp.route('/postfa', methods=['POST'])
 def upload_file_postfa_csv():
@@ -21,7 +24,8 @@ def upload_file_postfa_csv():
         file = request.files['file']
         if file.filename == '':
             return 'Nombre de archivo no válido'
-        upload_folder = os.path.join(os.getcwd()+'/backend/storage')
+        ## para probar desde local usar la ruta /backend/storage
+        upload_folder = os.path.join(os.getcwd()+ec2)
         print(upload_folder)
         try:
             file.save(os.path.join(upload_folder, "POSTFA"+file.filename))
@@ -41,7 +45,7 @@ def upload_file_prefa_xlsx():
         file = request.files['file']
         if file.filename == '':
             return 'Nombre de archivo no válido'
-        upload_folder = os.path.join(os.getcwd()+'/backend/storage')
+        upload_folder = os.path.join(os.getcwd()+ec2)
         try:
             file.save(os.path.join(upload_folder, "PREFA"+file.filename))
         except Exception as err:
