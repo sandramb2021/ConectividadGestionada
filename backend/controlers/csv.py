@@ -63,3 +63,6 @@ def exportarTablaNokia (tabla,liquidacion):
 
         return error
 
+def periodoNokia (tabla) :
+    listaPeriodos = tabla['bill_period'].tolist()
+    return list(set(listaPeriodos))
