@@ -38,7 +38,7 @@ def upload_file_postfa_csv():
         try:
             file.save(os.path.join(upload_folder, "POSTFA"+file.filename))
             ruta_archivo = upload_folder+"/POSTFA"+file.filename
-            upload_s3(config_path,ruta_archivo,"posfa-csv","POSTFA")
+            upload_s3(config_path,ruta_archivo,"posfa-csv","POSTFA.csv")
         except Exception as err:
             return err
         return "Archivo cargado con éxito"
@@ -59,7 +59,7 @@ def upload_file_prefa_xlsx():
         try:
             file.save(os.path.join(upload_folder, "PREFA"+file.filename))
             ruta_archivo = upload_folder+"/PREFA"+file.filename
-            upload_s3(config_path,ruta_archivo,"prefa-xlxs","PREFA")
+            upload_s3(config_path,ruta_archivo,"prefa-xlxs","PREFA.xlxs")
         except Exception as err:
             return err
         return "Archivo cargado con éxito"
