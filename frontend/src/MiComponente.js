@@ -49,19 +49,19 @@ const MiComponente = () => {
       }
     };
 
-    await axios.get("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/", options)
-    .then(response=>{
-      console.log(response.data);
-    }).catch(error=>{
-      console.log(error);
-    });
-    
-    /*await axios.post("ec2-54-242-104-125.compute-1.amazonaws.com:5000/prefa", formuPf)
+    /*await axios.get("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/", options)
     .then(response=>{
       console.log(response.data);
     }).catch(error=>{
       console.log(error);
     });*/
+    
+    await axios.post("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/prefa", formuPf, options)
+    .then(response=>{
+      console.log(response.data);
+    }).catch(error=>{
+      console.log(error);
+    });
 
   };
 
