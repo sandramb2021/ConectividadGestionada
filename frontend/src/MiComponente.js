@@ -30,8 +30,8 @@ const MiComponente = () => {
     const formuNk = new FormData();
     const formuPf = new FormData();
     
-    formuNk.append("files", nokiaFileSelected);
-    formuPf.append("files", posfaFileSelected);
+    formuNk.append("file", nokiaFileSelected);
+    formuPf.append("file", posfaFileSelected);
 
     /*await fetch("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/")
     .then(response=>{
