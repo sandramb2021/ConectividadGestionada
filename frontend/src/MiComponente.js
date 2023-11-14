@@ -30,17 +30,26 @@ const MiComponente = () => {
     const formuNk = new FormData();
     const formuPf = new FormData();
     
-    formuNk.append("files", nokiaFileSelected);
-    formuPf.append("files", posfaFileSelected);
+    formuNk.append("file", nokiaFileSelected);
+    formuPf.append("file", posfaFileSelected);
 
-    await axios.post("http://ec2-34-224-8-97.compute-1.amazonaws.com:5000/prefa", formuNk)
+    /*await fetch("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/")
     .then(response=>{
       console.log(response.data);
     }).catch(error=>{
       console.log(error);
-    });
+    });*/
+
+    /*await axios.get("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/")
+    .then(response=>{
+      console.log(response.data);
+    }).catch(error=>{
+      console.log(error);
+    });*/
+    console.log(formuPf);
+    console.log(posfaFileSelected);
     
-    await axios.post("http://ec2-34-224-8-97.compute-1.amazonaws.com:5000/posfa", formuPf)
+    await axios.post("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/prefa", formuPf)
     .then(response=>{
       console.log(response.data);
     }).catch(error=>{
