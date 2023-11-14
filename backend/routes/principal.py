@@ -3,7 +3,7 @@ import os
 import boto3
 import json
 
-from s3.list_buckets import list_buckets
+from s3.list_buckets import list_buckets, upload_s3
 from controlers.funtion import read_storage_prefa, read_storage_postfa, load_file_csv, load_file_excel
 from controlers.csv import obtenerListaLiquidacion, exportarTablaNokia, periodoNokia
 from controlers.xlsx import exportarTablaPrefa, periodoPrefa
@@ -37,6 +37,8 @@ def upload_file_postfa_csv():
         print(upload_folder)
         try:
             file.save(os.path.join(upload_folder, "POSTFA"+file.filename))
+            ruta_archivo = upload_folder+"/POSTFA"+file.filename
+            upload_s3(config_path,ruta_archivo,"posfa-csv","POSTFA"+file.filename)
         except Exception as err:
             return err
         return "Archivo cargado con éxito"
