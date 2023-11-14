@@ -8,6 +8,8 @@ const MiComponente = () => {
   
   const [nokiaFileSelected, setNokiaFileSelected] = useState('');
   const [posfaFileSelected, setPosfaFileSelected] = useState('');
+  const [respuestaNokiaPost, setRespuestaNokiaPost] = useState('');
+  const [respuestaPosfaPost, setRespuestaPosfaPost] = useState('');
   const lblNokiaFile = nokiaFileSelected.name;
   const lblPosfaFile = posfaFileSelected.name;
     
@@ -36,6 +38,7 @@ const MiComponente = () => {
     await axios.post("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/postfa", formuNk)
     .then(response=>{
       console.log(response.data);
+      setRespuestaNokiaPost(response.data);
     }).catch(error=>{
       console.log(error);
     });
@@ -43,6 +46,7 @@ const MiComponente = () => {
     await axios.post("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/prefa", formuPf)
     .then(response=>{
       console.log(response.data);
+      setRespuestaPosfaPost(response.data);
     }).catch(error=>{
       console.log(error);
     });
@@ -64,6 +68,7 @@ const MiComponente = () => {
             <ReactFileReader handleFiles = {uploadFile} fileTypes={".csv"}>
               <button className="btn"> Leer archivo NOKIA </button>
             </ReactFileReader>
+            <label id="respuestaNokia">{ respuestaNokiaPost }</label>
           </div>
           <div id="form-line">
             <label> Seleccione el archivo XLS de la <strong>POSFA</strong> a leer:
@@ -77,10 +82,11 @@ const MiComponente = () => {
             <ReactFileReader handleFiles = {uploadFile} fileTypes={".xlsx"}>
               <button className="btn"> Leer archivo POSFA </button>
             </ReactFileReader>
+            <label id="respuestaPosfa">{ respuestaPosfaPost }</label>
           </div>
           <div id="form-line">
             <button className="btn" onClick={()=>btnProcesar()}> Procesar archivos </button>
-            
+            <label id="estado">{  (respuestaNokiaPost == "Archivo cargado con éxito")  && (respuestaPosfaPost == "Archivo cargado con éxito" ) ? "Procesando....." : "Ocurrió un error" }</label>
           </div>     
       </div>
     </>
