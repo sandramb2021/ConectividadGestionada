@@ -27,6 +27,8 @@ ec2 = "/storage"
 @principal_bp.route('/postfa', methods=['POST'])
 def upload_file_postfa_csv():
     try:
+        print(request.files)
+        print(request.file)
         if 'file' not in request.files:
             return 'No se proporcionó ningún archivo'
         file = request.files['file']
