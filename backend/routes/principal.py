@@ -38,7 +38,7 @@ def upload_file_postfa_csv():
         try:
             file.save(os.path.join(upload_folder, "POSTFA"+file.filename))
             ruta_archivo = upload_folder+"/POSTFA"+file.filename
-            upload_s3(config_path,ruta_archivo,"posfa-csv","POSTFA.csv")
+            upload_s3(config_path,ruta_archivo,"postfa-csv","POSTFA.csv")
         except Exception as err:
             return err
         return "Archivo cargado con éxito"
