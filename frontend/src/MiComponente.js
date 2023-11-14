@@ -33,7 +33,7 @@ const MiComponente = () => {
     formuNk.append("files", nokiaFileSelected);
     formuPf.append("files", posfaFileSelected);
 
-    await axios.post("ec2-54-242-104-125.compute-1.amazonaws.com:5000/postfa", formuNk)
+    await axios.get("ec2-54-242-104-125.compute-1.amazonaws.com:5000/")
     .then(response=>{
       console.log(response.data);
     }).catch(error=>{
