@@ -33,21 +33,12 @@ const MiComponente = () => {
     formuNk.append("file", nokiaFileSelected);
     formuPf.append("file", posfaFileSelected);
 
-    /*await fetch("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/")
+    await axios.post("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/posfa", formuNk)
     .then(response=>{
       console.log(response.data);
     }).catch(error=>{
       console.log(error);
-    });*/
-
-    /*await axios.get("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/")
-    .then(response=>{
-      console.log(response.data);
-    }).catch(error=>{
-      console.log(error);
-    });*/
-    console.log(formuPf);
-    console.log(posfaFileSelected);
+    });
     
     await axios.post("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/prefa", formuPf)
     .then(response=>{
