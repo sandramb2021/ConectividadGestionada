@@ -40,22 +40,14 @@ const MiComponente = () => {
       console.log(error);
     });*/
 
-    const options = {        
-      headers: {
-          'Access-Control-Allow-Origin':'*',
-          'Access-Control-Allow-Methods': 'POST',
-          'Access-Control-Allow-Headers':'*',
-          'cache-control': 'no-cache'
-      }
-    };
-
-    /*await axios.get("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/", options)
+    /*await axios.get("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/")
     .then(response=>{
       console.log(response.data);
     }).catch(error=>{
       console.log(error);
     });*/
     console.log(formuPf);
+    console.log(posfaFileSelected);
     
     await axios.post("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/prefa", formuPf)
     .then(response=>{
