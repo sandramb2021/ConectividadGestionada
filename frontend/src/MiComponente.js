@@ -43,7 +43,7 @@ const MiComponente = () => {
     const options = {        
       headers: {
           'Access-Control-Allow-Origin':'*',
-          'Access-Control-Allow-Methods': 'GET',
+          'Access-Control-Allow-Methods': 'POST',
           'Access-Control-Allow-Headers':'*',
           'cache-control': 'no-cache'
       }
@@ -55,8 +55,9 @@ const MiComponente = () => {
     }).catch(error=>{
       console.log(error);
     });*/
+    console.log(formuPf);
     
-    await axios.post("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/prefa", formuPf, options)
+    await axios.post("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/prefa", formuPf)
     .then(response=>{
       console.log(response.data);
     }).catch(error=>{
