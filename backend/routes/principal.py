@@ -3,7 +3,7 @@ import os
 import boto3
 import json
 
-from s3.list_buckets import list_buckets, upload_s3
+from s3.list_buckets import list_buckets, upload_s3, leer_csv
 from controlers.funtion import read_storage_prefa, read_storage_postfa, load_file_csv, load_file_excel
 from controlers.csv import obtenerListaLiquidacion, exportarTablaNokia, periodoNokia
 from controlers.xlsx import exportarTablaPrefa, periodoPrefa
@@ -17,6 +17,12 @@ config_path = "config.json"
 ## RURA QUE DEVUELVE LOS BUCKETS
 @principal_bp.route('/',methods=['GET'])
 def listar_buckets():
+    lista = list_buckets(config_path)
+    return lista
+
+## quiero probar cuanto tiempo tarda en leer un s3 con un archivo csv
+@principal_bp.route('/prueba_tiempo',methods=['GET'])
+def leer_csv():
     lista = list_buckets(config_path)
     return lista
 
