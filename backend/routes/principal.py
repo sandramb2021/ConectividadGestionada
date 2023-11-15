@@ -22,7 +22,7 @@ def listar_buckets():
 
 ## quiero probar cuanto tiempo tarda en leer un s3 con un archivo csv
 @principal_bp.route('/prueba_tiempo',methods=['GET'])
-def leer_csv():
+def leer_csv_prueba():
     lista = leer_csv(config_path)
     return lista
 
