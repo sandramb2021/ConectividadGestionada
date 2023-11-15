@@ -70,7 +70,7 @@ def upload_file_prefa_xlsx():
         try:
             file.save(os.path.join(upload_folder, "PREFA"+file.filename))
             ruta_archivo = upload_folder+"/PREFA"+file.filename
-            upload_s3(config_path,ruta_archivo,"prefa-xlxs","PREFA.xlxs")
+            upload_s3(config_path,ruta_archivo,"prefa-xlxs","PREFA.xlsx")
         except Exception as err:
             return err
         return "Archivo cargado con éxito"

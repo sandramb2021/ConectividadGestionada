@@ -50,13 +50,13 @@ def leer_csv(config):
         print(f'Ocurrió un error al listar los buckets: {e}')
         return e
     
-def leer_xlxs(config):
+def leer_xlsx(config):
     inicio = time.time()
     with open(config) as f:
         config = json.load(f)
     s3 = boto3.client('s3', aws_access_key_id=config["aws_access_key_id"],aws_secret_access_key=config["aws_secret_access_key"],region_name=config["region"])
     try:
-        s3_response = s3.get_object(Bucket="prefa-xlxs", Key="PREFA.xlxs")
+        s3_response = s3.get_object(Bucket="prefa-xlxs", Key="PREFA.xlsx")
         xlxs_content = s3_response['Body'].read()
         df = pd.read_excel(xlxs_content)
         final = time.time()
