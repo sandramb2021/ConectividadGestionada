@@ -44,7 +44,7 @@ def leer_csv(config):
         df = pd.read_csv(csv_content, sep=";")
         final = time.time()
         print(final - inicio)
-        print(df.head(10))
+        print(df.head(10)) 
         return "hola"
     except Exception as e:
         print(f'Ocurrió un error al listar los buckets: {e}')
