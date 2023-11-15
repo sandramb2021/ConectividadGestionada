@@ -3,7 +3,7 @@ import os
 import boto3
 import json
 
-from s3.list_buckets import list_buckets, upload_s3, leer_csv
+from s3.list_buckets import list_buckets, upload_s3, leer_csv, leer_xlxs
 from controlers.funtion import read_storage_prefa, read_storage_postfa, load_file_csv, load_file_excel
 from controlers.csv import obtenerListaLiquidacion, exportarTablaNokia, periodoNokia
 from controlers.xlsx import exportarTablaPrefa, periodoPrefa
@@ -24,6 +24,11 @@ def listar_buckets():
 @principal_bp.route('/prueba_tiempo',methods=['GET'])
 def leer_csv_prueba():
     lista = leer_csv(config_path)
+    return lista
+
+@principal_bp.route('/prueba_tiempo_xlxs',methods=['GET'])
+def leer_csv_prueba_xlxs():
+    lista = leer_xlxs(config_path)
     return lista
 
 local = "/backend/storage"
