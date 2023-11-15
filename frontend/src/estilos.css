@@ -39,3 +39,15 @@ form{
     display: flex;
     flex-direction: column;
 }
+
+.respuesta{
+    margin-left: 2rem;
+    vertical-align: center;
+}
+
+#estado-line{
+    text-align: center;
+    margin: 2rem 1rem;
+    background-color: blue;
+    color: white;
+}

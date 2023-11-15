@@ -8,6 +8,8 @@ const MiComponente = () => {
   
   const [nokiaFileSelected, setNokiaFileSelected] = useState('');
   const [posfaFileSelected, setPosfaFileSelected] = useState('');
+  const [respuestaNokiaPost, setRespuestaNokiaPost] = useState('');
+  const [respuestaPosfaPost, setRespuestaPosfaPost] = useState('');
   const lblNokiaFile = nokiaFileSelected.name;
   const lblPosfaFile = posfaFileSelected.name;
     
@@ -33,25 +35,36 @@ const MiComponente = () => {
     formuNk.append("file", nokiaFileSelected);
     formuPf.append("file", posfaFileSelected);
 
+    document.getElementById("btn-procesar").disabled = true;
+    document.getElementById("estado").innerText = "Estamos trabajando....";
+
     await axios.post("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/postfa", formuNk)
     .then(response=>{
-      console.log(response.data);
-    }).catch(error=>{
-      console.log(error);
-    });
-    
-    await axios.post("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/prefa", formuPf)
-    .then(response=>{
-      console.log(response.data);
+      setRespuestaNokiaPost(response.data);
     }).catch(error=>{
       console.log(error);
     });
 
+    document.getElementById("respuestaNokia").innerText = respuestaNokiaPost.toString().endsWith("éxito") ? "  " & { respuestaNokiaPost } : "  Ocurrió un error";
+    
+    await axios.post("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/prefa", formuPf)
+    .then(response=>{
+      console.log(response.data);
+      setRespuestaPosfaPost(response.data);
+    }).catch(error=>{
+      console.log(error);
+    });
+    document.getElementById("respuestaPosfa").innerText = respuestaPosfaPost.toString().endsWith("éxito") ? "  " & { respuestaPosfaPost } : "  Ocurrió un error";
+
+    document.getElementById("estado").innerText = "Procesamos los datos ....";
   };
 
   return (
     <>
       <div>
+        <div id="estado-line">
+          <label id="estado"></label>
+        </div>
           <div id="form-line">
             <label> Seleccione el archivo CSV de la <strong>NOKIA</strong> a leer:
               <input 
@@ -64,6 +77,7 @@ const MiComponente = () => {
             <ReactFileReader handleFiles = {uploadFile} fileTypes={".csv"}>
               <button className="btn"> Leer archivo NOKIA </button>
             </ReactFileReader>
+            <label className="respuesta" id="respuestaNokia">{ respuestaNokiaPost }</label>
           </div>
           <div id="form-line">
             <label> Seleccione el archivo XLS de la <strong>POSFA</strong> a leer:
@@ -77,10 +91,10 @@ const MiComponente = () => {
             <ReactFileReader handleFiles = {uploadFile} fileTypes={".xlsx"}>
               <button className="btn"> Leer archivo POSFA </button>
             </ReactFileReader>
+            <label className="respuesta" id="respuestaPosfa">{ respuestaPosfaPost }</label>
           </div>
           <div id="form-line">
-            <button className="btn" onClick={()=>btnProcesar()}> Procesar archivos </button>
-            
+            <button className="btn" id="btn-procesar" onClick={()=>btnProcesar()}> Procesar archivos </button>
           </div>     
       </div>
     </>
