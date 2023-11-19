@@ -78,3 +78,28 @@ def upload_file_facturacion(request):
     except Exception as err:
         return(err)
     
+def delete_storage():
+    dir = 'storage'
+    archivos = os.listdir(dir)
+    try:
+        for archivo in archivos:
+            ruta_completa = os.path.join(dir, archivo)
+            try:
+                if os.path.isfile(ruta_completa):
+                    os.remove(ruta_completa)
+            except Exception as e:
+                return e    
+    except Exception as e:
+        return e
+
+def read_merge_storage():
+    try:
+        dir = os.getcwd()+"/merge"
+        directory = os.listdir(dir)
+        for file in directory:
+            if file.startswith("Tabla"):
+                return dir+"/"+file
+    except Exception as e:
+        return "Error en descar" + e    
+
+   

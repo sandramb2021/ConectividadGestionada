@@ -1,11 +1,10 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, send_file
 import os 
 import boto3
 import json
 
-from controlers.funtion import read_storage_nokia, read_storage_facturacion, load_file_csv, load_file_excel, upload_file_nokia, upload_file_facturacion
-from controlers.csv import obtenerListaLiquidacion, exportarTablaNokia, periodoNokia
-from controlers.xlsx import exportarTablaPrefa, periodoPrefa
+from controlers.funtion import read_storage_nokia, read_storage_facturacion, load_file_csv, load_file_excel, upload_file_nokia, upload_file_facturacion, delete_storage, read_merge_storage
+from controlers.csv import obtenerListaLiquidacion, exportarTablaNokia, periodoNokia, exportarTablaPrefa, periodoPrefa
 from controlers.process import procesar_archivos
 
 principal_bp = Blueprint('principal', __name__)
@@ -15,10 +14,12 @@ config_path = "config.json"
 local = "/backend/storage"
 ec2 = "/storage"
 
+
 ## RURA QUE DEVUELVE UN MSJ DE PRUEBA
 @principal_bp.route('/',methods=['GET'])
 def listar_buckets():
     return "prueba"
+
 
 ## RUTA QUE CARGA EL ARCHIVO CSV EN EC2
 @principal_bp.route('/nokia', methods=['POST'])
@@ -26,8 +27,7 @@ def upload_file_nokia_csv():
     upload_file_nokia(request)
     return "Se cargo correctamente el archivo NOKIA"
 
-
-  
+ 
 @principal_bp.route('/facturacion', methods=['POST'])
 def upload_file_facturacion_csv():
     try:
@@ -56,9 +56,14 @@ def process_file():
             periodo_facturacion = periodoPrefa(facturacion_file)
             
             process = procesar_archivos(tabla_nokia_final,tabla_facturacion_final,periodo_nokia,periodo_facturacion)
-            # print(process)
+            delete_storage()
             return "Se proceso correctamente el archivo"
         except Exception as err:
             return "Error en la lectura"+err
     except Exception as err:
         return err
+
+@principal_bp.route('/download', methods=['GET'])
+def download_file():
+    directory = read_merge_storage()
+    return send_file(directory, as_attachment=True, download_name="TablaFinal")

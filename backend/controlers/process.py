@@ -50,9 +50,7 @@ def procesar_archivos(prefa, postfa, periodoNokia, periodoPostfa):
             indice += 1
 
         tablaFinal = mergeIndex.assign(RESULTADO=listDesvio)
-        print(tablaFinal)
         direc = os.getcwd()+"/merge/"
-        print("el direct es " + direc)
         tablaFinal.to_csv(direc+f"TablaFinal${periodoNokia}.csv", index=False)
         return "hola"
     except Exception as err:
