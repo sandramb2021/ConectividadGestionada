@@ -42,3 +42,22 @@ def upload_file_nokia_s3(request):
         return "Archivo cargado con éxito"
     except Exception as err:
         return(err)
+    
+def upload_file_facturacion_s3(request):
+    try:
+        if 'file' not in request.files:
+            return 'No se proporcionó ningún archivo'
+        file = request.files['file']
+        if file.filename == '':
+            return 'Nombre de archivo no válido'
+        ## para probar desde ec2 usar la ruta /backend/storage
+        upload_folder = os.path.join(os.getcwd()+ec2)
+        print("path facturacion",upload_folder)
+        try:
+            file.save(os.path.join(upload_folder, "FACT"+file.filename))
+            upload_nokia_s3(upload_folder+"/FACT"+file.filename,"fact-prefa-postfa","FACT"+file.filename)
+        except Exception as err:
+            return err
+        return "Archivo cargado con éxito"
+    except Exception as err:
+        return(err)

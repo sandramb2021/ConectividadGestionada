@@ -6,7 +6,7 @@ import json
 from controlers.funtion import read_storage_nokia, read_storage_facturacion, load_file_csv, load_file_excel, upload_file_nokia, upload_file_facturacion, delete_storage, read_merge_storage
 from controlers.csv import obtenerListaLiquidacion, exportarTablaNokia, periodoNokia, exportarTablaPrefa, periodoPrefa
 from controlers.process import procesar_archivos
-from controlers.s3 import upload_file_nokia_s3
+from controlers.s3 import upload_file_nokia_s3, upload_file_facturacion_s3
 
 principal_bp = Blueprint('principal', __name__)
 
@@ -74,4 +74,10 @@ def download_file():
 @principal_bp.route('/nokia_s3', methods=['POST'])
 def upload_file_nokia_csv_s3():
     upload_file_nokia_s3(request)
+    return "Se cargo correctamente el archivo NOKIA"
+
+## RUTA QUE CARGA EL ARCHIVO FACTURACION EN EC2 y S3
+@principal_bp.route('/facturacion_s3', methods=['POST'])
+def upload_file_facturacion_csv_s3():
+    upload_file_facturacion_s3(request)
     return "Se cargo correctamente el archivo NOKIA"
