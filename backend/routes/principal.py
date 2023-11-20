@@ -24,7 +24,22 @@ def listar_buckets():
 ## RUTA QUE CARGA EL ARCHIVO CSV EN EC2
 @principal_bp.route('/nokia', methods=['POST'])
 def upload_file_nokia_csv():
-    upload_file_nokia(request)
+    try:
+        if 'file' not in request.files:
+            return 'No se proporcionó ningún archivo'
+        file = request.files['file']
+        if file.filename == '':
+            return 'Nombre de archivo no válido'
+        ## para probar desde ec2 usar la ruta /backend/storage
+        upload_folder = os.path.join(os.getcwd()+ec2)
+        print(upload_folder)
+        try:
+            file.save(os.path.join(upload_folder, "NOKIA"+file.filename))
+        except Exception as err:
+            return err
+        return "Archivo cargado con éxito"
+    except Exception as err:
+        return(err)
     return "Se cargo correctamente el archivo NOKIA"
 
  
