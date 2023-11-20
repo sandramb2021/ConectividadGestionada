@@ -102,4 +102,3 @@ def read_merge_storage():
     except Exception as e:
         return "Error en descar" + e    
 
-   
