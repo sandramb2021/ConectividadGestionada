@@ -72,6 +72,6 @@ def download_file():
 
 ## RUTA QUE CARGA EL ARCHIVO CSV EN EC2 y S3
 @principal_bp.route('/nokia_s3', methods=['POST'])
-def upload_file_nokia_csv():
+def upload_file_nokia_csv_s3():
     upload_file_nokia_s3(request)
     return "Se cargo correctamente el archivo NOKIA"
