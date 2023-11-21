@@ -35,7 +35,7 @@ def upload_file_nokia_s3(request):
         upload_folder = os.path.join(os.getcwd()+ec2)
         print(upload_folder)
         try:
-            file.save(os.path.join(upload_folder, "NOKIA"+file.filename))
+            file.save(os.path.join(upload_folder, "NOKIA"))
             upload_nokia_s3(upload_folder+"/NOKIA"+file.filename,"fact-nokia","NOKIA")
         except Exception as err:
             return err
@@ -54,7 +54,7 @@ def upload_file_facturacion_s3(request):
         upload_folder = os.path.join(os.getcwd()+ec2)
         print("path facturacion",upload_folder)
         try:
-            file.save(os.path.join(upload_folder, "FACT"+file.filename))
+            file.save(os.path.join(upload_folder, "FACT"))
             upload_nokia_s3(upload_folder+"/FACT"+file.filename,"fact-prefa-postfa","FACT")
         except Exception as err:
             return err
