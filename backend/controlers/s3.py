@@ -55,7 +55,7 @@ def upload_file_facturacion_s3(request):
         print("path facturacion",upload_folder)
         try:
             file.save(os.path.join(upload_folder, "FACT"+file.filename))
-            upload_nokia_s3(upload_folder+"/FACT"+file.filename,"fact-prefa-postfa","FACT"+file.filename)
+            upload_nokia_s3(upload_folder+"/FACT"+file.filename,"fact-prefa-postfa","FACT")
         except Exception as err:
             return err
         return "Archivo cargado con éxito"
