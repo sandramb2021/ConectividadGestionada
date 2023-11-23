@@ -38,9 +38,10 @@ def upload_file_nokia_s3(request):
         print(len(file.read()))
         
         try:
-            file.save(os.path.join(upload_folder, "NOKIA"+file.filename))
+            file.save(os.path.join(upload_folder, "NOKIA"))
             try:
-                upload_nokia_s3(upload_folder+"/NOKIA"+file.filename,"fact-nokia","NOKIA")
+                upload_nokia_s3(upload_folder+"/NOKIA","fact-nokia","NOKIA")
+                print(upload_folder+"/NOKIA")
                 print("Se cargo todo ok")
                 return "Se cargo todo ok"
             except:
