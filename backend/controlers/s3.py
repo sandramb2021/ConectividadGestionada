@@ -37,9 +37,10 @@ def upload_file_nokia_s3(request):
         try:
             file.save(os.path.join(upload_folder, "NOKIA"))
             upload_nokia_s3(upload_folder+"/NOKIA"+file.filename,"fact-nokia","NOKIA")
+            print("Se cargo todo ok")
+            return "Se cargo todo ok"
         except Exception as err:
             return err
-        return "Archivo cargado con éxito"
     except Exception as err:
         return(err)
     
