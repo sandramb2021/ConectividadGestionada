@@ -32,11 +32,11 @@ def upload_file_nokia_s3(request):
         if file.filename == '':
             return 'Nombre de archivo no válido'
         ## para probar desde ec2 usar la ruta /backend/storage
-        upload_folder = os.path.join(os.getcwd()+ec2)       
+        upload_folder = os.path.join(os.getcwd()+ec2)   
         try:
             file.save(os.path.join(upload_folder, "NOKIA"))
             try:
-                upload_nokia_s3(upload_folder+"/NOKIA","fact-nokia","NOKIA")
+                upload_nokia_s3(upload_folder+"/NOKIA","fact-nokia","NOKIA.csv")
                 print(upload_folder+"/NOKIA")
                 print("Se cargo todo ok")
                 return "Se cargo todo ok"
@@ -59,7 +59,7 @@ def upload_file_facturacion_s3(request):
         print("path facturacion",upload_folder)
         try:
             file.save(os.path.join(upload_folder, "FACT"))
-            upload_nokia_s3(upload_folder+"/FACT","fact-prefa-postfa","FACT")
+            upload_nokia_s3(upload_folder+"/FACT","fact-prefa-postfa","FACT.csv")
         except Exception as err:
             return err
         return "Archivo cargado con éxito"
