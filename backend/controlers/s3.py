@@ -38,9 +38,9 @@ def upload_file_nokia_s3(request):
         print(len(file.read()))
         
         try:
-            file.save(os.path.join(upload_folder, "NOKIA.csv"))
+            file.save(os.path.join(upload_folder, "NOKIA"))
             try:
-                upload_nokia_s3(upload_folder+"/NOKIA.csv","fact-nokia","NOKIA.csv")
+                upload_nokia_s3(upload_folder+"/NOKIA","fact-nokia","NOKIA.csv")
                 print(upload_folder+"/NOKIA")
                 print("Se cargo todo ok")
                 return "Se cargo todo ok"
@@ -62,8 +62,8 @@ def upload_file_facturacion_s3(request):
         upload_folder = os.path.join(os.getcwd()+ec2)
         print("path facturacion",upload_folder)
         try:
-            file.save(os.path.join(upload_folder, "FACT.csv"))
-            upload_nokia_s3(upload_folder+"/FACT.csv","fact-prefa-postfa","FACT.csv")
+            file.save(os.path.join(upload_folder, "FACT"))
+            upload_nokia_s3(upload_folder+"/FACT","fact-prefa-postfa","FACT.csv")
         except Exception as err:
             return err
         return "Archivo cargado con éxito"
