@@ -3,8 +3,10 @@ import React, {useState} from "react";
 import ReactFileReader from 'react-file-reader';
 import axios from 'axios';
 import './estilos.css';
+//import { extractSheetData } from "../util/util.js";
+import { IO } from "@grapecity/spread-excelio";
 
-const MiComponente = () => {
+export const MiComponente = () => {
   
   const [nokiaFileSelected, setNokiaFileSelected] = useState('');
   const [posfaFileSelected, setPosfaFileSelected] = useState('');
@@ -12,6 +14,9 @@ const MiComponente = () => {
   const [respuestaPosfaPost, setRespuestaPosfaPost] = useState('');
   const lblNokiaFile = nokiaFileSelected.name;
   const lblPosfaFile = posfaFileSelected.name;
+
+  
+  const [_spread, setSpread] = useState({});
     
   const uploadFile = (files) => {
     // Creating the object of FileReader Class
@@ -28,6 +33,21 @@ const MiComponente = () => {
     
   };
 
+  const fileChange = (e) => {
+    if (_spread) {
+        const fileDom = e.target || e.srcElement;
+        const excelIO = new IO();
+        const spread = spread;
+        /*const deserializationOptions = {
+            frozenRowsAsColumnHeaders: true
+        };
+        excelIO.open(fileDom.files[0], (data) => {
+            const newSalesData = extractSheetData(data);
+            console.log(newSalesData);
+        });*/
+    };
+  };
+
   const btnProcesar = async() => {
     const formuNk = new FormData();
     const formuPf = new FormData();
@@ -38,7 +58,7 @@ const MiComponente = () => {
     document.getElementById("btn-procesar").disabled = true;
     document.getElementById("estado").innerText = "Estamos trabajando....";
 
-    await axios.post("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/postfa", formuNk)
+    await axios.post("http://ec2-54-235-43-10.compute-1.amazonaws.com:5000/nokia_s3", formuNk)
     .then(response=>{
       setRespuestaNokiaPost(response.data);
     }).catch(error=>{
@@ -47,7 +67,7 @@ const MiComponente = () => {
 
     document.getElementById("respuestaNokia").innerText = respuestaNokiaPost.toString().endsWith("éxito") ? "  " & { respuestaNokiaPost } : "  Ocurrió un error";
     
-    await axios.post("http://ec2-54-242-104-125.compute-1.amazonaws.com:5000/prefa", formuPf)
+    await axios.post("http://ec2-54-235-43-10.compute-1.amazonaws.com:5000/facturacion_s3", formuPf)
     .then(response=>{
       console.log(response.data);
       setRespuestaPosfaPost(response.data);
@@ -88,7 +108,7 @@ const MiComponente = () => {
                 onChange={e => setPosfaFileSelected(e.target.posfaFile)}
               />
             </label>
-            <ReactFileReader handleFiles = {uploadFile} fileTypes={".xlsx"}>
+            <ReactFileReader handleFiles = {uploadFile} fileTypes={".csv"}>
               <button className="btn"> Leer archivo POSFA </button>
             </ReactFileReader>
             <label className="respuesta" id="respuestaPosfa">{ respuestaPosfaPost }</label>
@@ -96,8 +116,14 @@ const MiComponente = () => {
           <div id="form-line">
             <button className="btn" id="btn-procesar" onClick={()=>btnProcesar()}> Procesar archivos </button>
           </div>     
+          <div>
+        <div>
+          <b>Import Excel File:</b>
+          <input type="file" className="fileSelect" 
+            onChange={(e) => fileChange(e)} />
+        </div>
+    </div>
       </div>
     </>
   );
 }
-export default MiComponente;

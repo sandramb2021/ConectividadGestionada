@@ -4,7 +4,7 @@ body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-#leerArchivos{
+#leerArchivos, form{
     margin-top: 2em;
     margin-left: 2em;
 }
@@ -14,8 +14,8 @@ input{
     background-color: darkgrey;
     text-align: left;
     height: 30px;
-    width: 500px;
-    margin-left: 2em;
+    width: 600px;
+    
     
 }
 
@@ -25,6 +25,7 @@ input{
     margin: 50px 50px;
 }
 
+
 button, .btn{
     background: darkblue;
     padding: 2px 2px 2px 2xp;
@@ -32,7 +33,7 @@ button, .btn{
     width: 230px;
     height: 35px;
     border-radius: 8px;
-    margin-left: 1em;
+    
 }
 
 form{
