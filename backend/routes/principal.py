@@ -75,7 +75,6 @@ def download_file():
 def upload_file_nokia_csv_s3():
     try:
         upload_file_nokia_s3(request)
-        print(upload_file_nokia_s3(request))
         return "Se cargo correctamente el archivo NOKIA"
     except Exception as e:
         return "No se cargo nada",e
