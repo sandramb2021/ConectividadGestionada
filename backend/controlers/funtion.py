@@ -21,6 +21,7 @@ def read_storage_nokia():
     try:
         hola = os.getcwd()+ec2
         directory = os.listdir(hola)
+        print(directory)
         for file in directory:
             if file.startswith("NOKIA"):
                 return hola+"/"+file
