@@ -45,17 +45,18 @@ def process_file():
         path_nokia = read_storage_nokia()
         ## ARCHIVO PREFA O POSTFA
         path_facturacion = read_storage_facturacion()
-
+        if (path_nokia or path_facturacion).startswith("No se encontro"):
+            return "No se encontro archivo para procesar"
         try:
-            # nokia_file = load_file_csv(path_nokia)
-            # liquidacion = obtenerListaLiquidacion(nokia_file)
-            # tabla_nokia_final = exportarTablaNokia(nokia_file,liquidacion)
-            # periodo_nokia = periodoNokia(nokia_file)
+            nokia_file = load_file_csv(path_nokia)
+            liquidacion = obtenerListaLiquidacion(nokia_file)
+            tabla_nokia_final = exportarTablaNokia(nokia_file,liquidacion)
+            periodo_nokia = periodoNokia(nokia_file)
 
             # facturacion_file = load_file_csv(path_facturacion)
             # tabla_facturacion_final = exportarTablaPrefa(facturacion_file)
             # periodo_facturacion = periodoPrefa(facturacion_file)
-            print(path_nokia)
+            print(periodo_nokia)
             #process = procesar_archivos(tabla_nokia_final,tabla_facturacion_final,periodo_nokia,periodo_facturacion)
             #delete_storage()
             return "Se proceso correctamente el archivo"
