@@ -53,10 +53,11 @@ def process_file():
             tabla_nokia_final = exportarTablaNokia(nokia_file,liquidacion)
             periodo_nokia = periodoNokia(nokia_file)
 
-            # facturacion_file = load_file_csv(path_facturacion)
-            # tabla_facturacion_final = exportarTablaPrefa(facturacion_file)
-            # periodo_facturacion = periodoPrefa(facturacion_file)
+            facturacion_file = load_file_csv(path_facturacion)
+            tabla_facturacion_final = exportarTablaPrefa(facturacion_file)
+            periodo_facturacion = periodoPrefa(facturacion_file)
             print(periodo_nokia)
+            print(periodo_facturacion)
             #process = procesar_archivos(tabla_nokia_final,tabla_facturacion_final,periodo_nokia,periodo_facturacion)
             #delete_storage()
             return "Se proceso correctamente el archivo"
